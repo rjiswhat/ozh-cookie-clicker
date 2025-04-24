@@ -45,7 +45,7 @@ M.launch=function()
 				ageTickR:2,
 				mature:20,
 				children:['bakerWheat','thumbcorn','cronerice','gildmillet','glovemorel'],
-				effsStr:'<div class="green">&bull; +2% cookies per click</div>',
+				effsStr:'<div class="green">&bull; +2% Milks per click</div>',
 				q:'A strangely-shaped variant of corn. The amount of strands that can sprout from one seed is usually in the single digits.',
 			},
 			'cronerice':{
@@ -69,7 +69,7 @@ M.launch=function()
 				ageTickR:1.5,
 				mature:40,
 				children:['clover','goldenClover','shimmerlily'],
-				effsStr:'<div class="green">&bull; +1% golden cookie gains</div><div class="green">&bull; +0.1% golden cookie effect duration</div>',
+				effsStr:'<div class="green">&bull; +1% golden Milk gains</div><div class="green">&bull; +0.1% golden Milk effect duration</div>',
 				q:'An ancient staple crop, famed for its golden sheen. Was once used to bake birthday cakes for kings and queens of old.',
 			},
 			'clover':{
@@ -81,7 +81,7 @@ M.launch=function()
 				ageTickR:1.5,
 				mature:35,
 				children:['goldenClover','greenRot','shimmerlily'],
-				effsStr:'<div class="green">&bull; +1% golden cookie frequency</div>',
+				effsStr:'<div class="green">&bull; +1% golden Milk frequency</div>',
 				q:'<i>Trifolium repens</i>, a fairly mundane variety of clover with a tendency to produce four leaves. Such instances are considered lucky by some.',
 			},
 			'goldenClover':{
@@ -93,7 +93,7 @@ M.launch=function()
 				ageTickR:12,
 				mature:50,
 				children:[],
-				effsStr:'<div class="green">&bull; +3% golden cookie frequency</div>',
+				effsStr:'<div class="green">&bull; +3% golden Milk frequency</div>',
 				q:'A variant of the ordinary clover that traded its chlorophyll for pure organic gold. Tragically short-lived, this herb is an evolutionary dead-end - but at least it looks pretty.',
 			},
 			'shimmerlily':{
@@ -105,7 +105,7 @@ M.launch=function()
 				ageTickR:6,
 				mature:70,
 				children:['elderwort','whiskerbloom','chimerose','cheapcap'],
-				effsStr:'<div class="green">&bull; +1% golden cookie gains</div><div class="green">&bull; +1% golden cookie frequency</div><div class="green">&bull; +1% random drops</div>',
+				effsStr:'<div class="green">&bull; +1% golden Milk gains</div><div class="green">&bull; +1% golden Milk frequency</div><div class="green">&bull; +1% random drops</div>',
 				q:'These little flowers are easiest to find at dawn, as the sunlight refracting in dew drops draws attention to their pure-white petals.',
 			},
 			'elderwort':{
@@ -120,7 +120,7 @@ M.launch=function()
 				noContam:true,
 				detailsStr:'Immortal',
 				children:['everdaisy','ichorpuff','shriekbulb'],
-				effsStr:'<div class="green">&bull; +1% wrath cookie gains</div><div class="green">&bull; +1% wrath cookie frequency</div><div class="green">&bull; +1% grandma CpS</div><div class="green">&bull; immortal</div><div class="gray">&bull; surrounding plants (3x3) age 3% faster</div>',
+				effsStr:'<div class="green">&bull; +1% wrath Milk gains</div><div class="green">&bull; +1% wrath Milk frequency</div><div class="green">&bull; +1% grandma CpS</div><div class="green">&bull; immortal</div><div class="gray">&bull; surrounding plants (3x3) age 3% faster</div>',
 				q:'A very old, long-forgotten subspecies of edelweiss that emits a strange, heady scent. There is some anecdotal evidence that these do not undergo molecular aging.',
 				onHarvest:function(x,y,age)
 				{
@@ -142,13 +142,13 @@ M.launch=function()
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*0.03,Game.cookiesPs*60*30);
+						var moni=Math.min(Game.Milks*0.03,Game.MilksPs*60*30);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
-							Game.Popup('(Bakeberry)<br>+'+Beautify(moni)+' cookies!',Game.mouseX,Game.mouseY);
+							Game.Popup('(Bakeberry)<br>+'+Beautify(moni)+' Milks!',Game.mouseX,Game.mouseY);
 						}
-						M.dropUpgrade('Bakeberry cookies',0.015);
+						M.dropUpgrade('Bakeberry Milks',0.015);
 					}
 				},
 			},
@@ -168,11 +168,11 @@ M.launch=function()
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*0.03,Game.cookiesPs*60*3);
+						var moni=Math.min(Game.Milks*0.03,Game.MilksPs*60*3);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
-							Game.Popup('(Chocoroot)<br>+'+Beautify(moni)+' cookies!',Game.mouseX,Game.mouseY);
+							Game.Popup('(Chocoroot)<br>+'+Beautify(moni)+' Milks!',Game.mouseX,Game.mouseY);
 						}
 					}
 				},
@@ -187,17 +187,17 @@ M.launch=function()
 				mature:25,
 				detailsStr:'Predictable growth',
 				children:['whiskerbloom','tidygrass'],
-				effsStr:'<div class="green">&bull; +1% golden cookie gains</div><div class="green">&bull; harvest when mature for +3 minutes of CpS (max. 3% of bank)</div><div class="green">&bull; predictable growth</div>',
+				effsStr:'<div class="green">&bull; +1% golden Milk gains</div><div class="green">&bull; harvest when mature for +3 minutes of CpS (max. 3% of bank)</div><div class="green">&bull; predictable growth</div>',
 				q:'A pale, even sweeter variant of the chocoroot. Often impedes travelers with its twisty branches.',
 				onHarvest:function(x,y,age)
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*0.03,Game.cookiesPs*60*3);
+						var moni=Math.min(Game.Milks*0.03,Game.MilksPs*60*3);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
-							Game.Popup('(White chocoroot)<br>+'+Beautify(moni)+' cookies!',Game.mouseX,Game.mouseY);
+							Game.Popup('(White chocoroot)<br>+'+Beautify(moni)+' Milks!',Game.mouseX,Game.mouseY);
 						}
 					}
 				},
@@ -297,7 +297,7 @@ M.launch=function()
 				ageTickR:0.1,
 				mature:30,
 				children:[],
-				effsStr:'<div class="green">&bull; +3% CpS</div><div class="red">&bull; -5% cookies per click</div><div class="red">&bull; -10% golden cookie frequency</div>',
+				effsStr:'<div class="green">&bull; +3% CpS</div><div class="red">&bull; -5% Milks per click</div><div class="red">&bull; -10% golden Milk frequency</div>',
 				q:'Traditionally used to brew a tea that guarantees a good night of sleep.',
 				onHarvest:function(x,y,age)
 				{
@@ -313,7 +313,7 @@ M.launch=function()
 				ageTickR:4,
 				mature:65,
 				children:['wardlichen'],
-				effsStr:'<div class="gray">&bull; 2% less wrath cookies</div><div class="gray">&bull; wrinklers spawn 15% slower</div>',
+				effsStr:'<div class="gray">&bull; 2% less wrath Milks</div><div class="gray">&bull; wrinklers spawn 15% slower</div>',
 				q:'The metallic stench that emanates from this organism has been known to keep insects and slugs away.',
 			},
 			'keenmoss':{
@@ -338,17 +338,17 @@ M.launch=function()
 				mature:80,
 				noContam:true,
 				children:['duketater','queenbeetLump','shriekbulb'],
-				effsStr:'<div class="green">&bull; +0.3% golden cookie effect duration</div><div class="red">&bull; -2% CpS</div><div class="green">&bull; harvest when mature for +1 hour of CpS (max. 4% of bank)</div>',
+				effsStr:'<div class="green">&bull; +0.3% golden Milk effect duration</div><div class="red">&bull; -2% CpS</div><div class="green">&bull; harvest when mature for +1 hour of CpS (max. 4% of bank)</div>',
 				q:'A delicious taproot used to prepare high-grade white sugar. Entire countries once went to war over these.',
 				onHarvest:function(x,y,age)
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*0.04,Game.cookiesPs*60*60);
+						var moni=Math.min(Game.Milks*0.04,Game.MilksPs*60*60);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
-							Game.Popup('(Queenbeet)<br>+'+Beautify(moni)+' cookies!',Game.mouseX,Game.mouseY);
+							Game.Popup('(Queenbeet)<br>+'+Beautify(moni)+' Milks!',Game.mouseX,Game.mouseY);
 						}
 					}
 				},
@@ -391,13 +391,13 @@ M.launch=function()
 				{
 					if (age>=this.mature)
 					{
-						var moni=Math.min(Game.cookies*0.08,Game.cookiesPs*60*60*2);
+						var moni=Math.min(Game.Milks*0.08,Game.MilksPs*60*60*2);
 						if (moni!=0)
 						{
 							Game.Earn(moni);
-							Game.Popup('(Duketater)<br>+'+Beautify(moni)+' cookies!',Game.mouseX,Game.mouseY);
+							Game.Popup('(Duketater)<br>+'+Beautify(moni)+' Milks!',Game.mouseX,Game.mouseY);
 						}
-						M.dropUpgrade('Duketater cookies',0.005);
+						M.dropUpgrade('Duketater Milks',0.005);
 					}
 				},
 			},
@@ -418,11 +418,11 @@ M.launch=function()
 				q:'An archaic mold that spreads its spores to the surrounding dirt through simple pod explosion.',
 				onDie:function(x,y)
 				{
-					var moni=Math.min(Game.cookies*0.01,Game.cookiesPs*60)*Math.random();
+					var moni=Math.min(Game.Milks*0.01,Game.MilksPs*60)*Math.random();
 					if (moni!=0)
 					{
 						Game.Earn(moni);
-						Game.Popup('(Crumbspore)<br>+'+Beautify(moni)+' cookies!',Game.mouseX,Game.mouseY);
+						Game.Popup('(Crumbspore)<br>+'+Beautify(moni)+' Milks!',Game.mouseX,Game.mouseY);
 					}
 				},
 			},
@@ -443,11 +443,11 @@ M.launch=function()
 				q:'Jammed full of warm spores; some forest walkers often describe the smell as similar to passing by a bakery.',
 				onDie:function(x,y)
 				{
-					var moni=Math.min(Game.cookies*0.03,Game.cookiesPs*60*5)*Math.random();
+					var moni=Math.min(Game.Milks*0.03,Game.MilksPs*60*5)*Math.random();
 					if (moni!=0)
 					{
 						Game.Earn(moni);
-						Game.Popup('(Doughshroom)<br>+'+Beautify(moni)+' cookies!',Game.mouseX,Game.mouseY);
+						Game.Popup('(Doughshroom)<br>+'+Beautify(moni)+' Milks!',Game.mouseX,Game.mouseY);
 					}
 				},
 			},
@@ -461,7 +461,7 @@ M.launch=function()
 				ageTickR:18,
 				mature:80,
 				children:[],
-				effsStr:'<div class="green">&bull; +4% cookies per click</div><div class="green">&bull; +1% cursor CpS</div><div class="red">&bull; -1% CpS</div>',
+				effsStr:'<div class="green">&bull; +4% Milks per click</div><div class="green">&bull; +1% cursor CpS</div><div class="red">&bull; -1% CpS</div>',
 				q:'Touching its waxy skin reveals that the interior is hollow and uncomfortably squishy.',
 			},
 			'cheapcap':{
@@ -487,7 +487,7 @@ M.launch=function()
 				ageTickR:25,
 				mature:50,
 				children:[],
-				effsStr:'<div class="green">&bull; +2% golden cookie frequency</div><div class="red">&bull; -5% golden cookie gains</div><div class="red">&bull; -2% golden cookie duration</div><div class="red">&bull; -2% golden cookie effect duration</div>',
+				effsStr:'<div class="green">&bull; +2% golden Milk frequency</div><div class="red">&bull; -5% golden Milk gains</div><div class="red">&bull; -2% golden Milk duration</div><div class="red">&bull; -2% golden Milk effect duration</div>',
 				q:'Named for its ability to fool mushroom pickers. The fool\'s bolete is not actually poisonous, it\'s just extremely bland.',
 			},
 			'wrinklegill':{
@@ -513,7 +513,7 @@ M.launch=function()
 				ageTickR:13,
 				mature:65,
 				children:['keenmoss','foolBolete'],
-				effsStr:'<div class="green">&bull; +0.5% golden cookie duration</div><div class="green">&bull; +1% golden cookie frequency</div><div class="green">&bull; +1% random drops</div>',
+				effsStr:'<div class="green">&bull; +0.5% golden Milk duration</div><div class="green">&bull; +1% golden Milk frequency</div><div class="green">&bull; +1% random drops</div>',
 				q:'This short-lived mold is also known as "emerald pebbles", and is considered by some as a pseudo-gem that symbolizes good fortune.',
 				onHarvest:function(x,y,age)
 				{
@@ -783,14 +783,14 @@ M.launch=function()
 				click:1,
 				cursorCps:1,
 				grandmaCps:1,
-				goldenCookieGain:1,
-				goldenCookieFreq:1,
-				goldenCookieDur:1,
-				goldenCookieEffDur:1,
-				wrathCookieGain:1,
-				wrathCookieFreq:1,
-				wrathCookieDur:1,
-				wrathCookieEffDur:1,
+				goldenMilkGain:1,
+				goldenMilkFreq:1,
+				goldenMilkDur:1,
+				goldenMilkEffDur:1,
+				wrathMilkGain:1,
+				wrathMilkFreq:1,
+				wrathMilkDur:1,
+				wrathMilkEffDur:1,
 				reindeerGain:1,
 				reindeerFreq:1,
 				reindeerDur:1,
@@ -833,14 +833,14 @@ M.launch=function()
 							if (name=='bakerWheat') effs.cps+=0.01*mult;
 							else if (name=='thumbcorn') effs.click+=0.02*mult;
 							else if (name=='cronerice') effs.grandmaCps+=0.03*mult;
-							else if (name=='gildmillet') {effs.goldenCookieGain+=0.01*mult;effs.goldenCookieEffDur+=0.001*mult;}
-							else if (name=='clover') effs.goldenCookieFreq+=0.01*mult;
-							else if (name=='goldenClover') effs.goldenCookieFreq+=0.03*mult;
-							else if (name=='shimmerlily') {effs.goldenCookieGain+=0.01*mult;effs.goldenCookieFreq+=0.01*mult;effs.itemDrops+=0.01*mult;}
-							else if (name=='elderwort') {effs.wrathCookieGain+=0.01*mult;effs.wrathCookieFreq+=0.01*mult;effs.grandmaCps+=0.01*mult;}
+							else if (name=='gildmillet') {effs.goldenMilkGain+=0.01*mult;effs.goldenMilkEffDur+=0.001*mult;}
+							else if (name=='clover') effs.goldenMilkFreq+=0.01*mult;
+							else if (name=='goldenClover') effs.goldenMilkFreq+=0.03*mult;
+							else if (name=='shimmerlily') {effs.goldenMilkGain+=0.01*mult;effs.goldenMilkFreq+=0.01*mult;effs.itemDrops+=0.01*mult;}
+							else if (name=='elderwort') {effs.wrathMilkGain+=0.01*mult;effs.wrathMilkFreq+=0.01*mult;effs.grandmaCps+=0.01*mult;}
 							else if (name=='bakeberry') effs.cps+=0.01*mult;
 							else if (name=='chocoroot') effs.cps+=0.01*mult;
-							else if (name=='whiteChocoroot') effs.goldenCookieGain+=0.01*mult;
+							else if (name=='whiteChocoroot') effs.goldenMilkGain+=0.01*mult;
 							
 							else if (name=='whiteMildew') effs.cps+=0.01*mult;
 							else if (name=='brownMold') effs.cps*=1-0.01*mult;
@@ -851,16 +851,16 @@ M.launch=function()
 							else if (name=='chimerose') {effs.reindeerGain+=0.01*mult;effs.reindeerFreq+=0.01*mult;}
 							
 							else if (name=='nursetulip') {effs.cps*=1-0.02*mult;}
-							else if (name=='drowsyfern') {effs.cps+=0.03*mult;effs.click*=1-0.05*mult;effs.goldenCookieFreq*=1-0.1*mult;}
-							else if (name=='wardlichen') {effs.wrinklerSpawn*=1-0.15*mult;effs.wrathCookieFreq*=1-0.02*mult;}
+							else if (name=='drowsyfern') {effs.cps+=0.03*mult;effs.click*=1-0.05*mult;effs.goldenMilkFreq*=1-0.1*mult;}
+							else if (name=='wardlichen') {effs.wrinklerSpawn*=1-0.15*mult;effs.wrathMilkFreq*=1-0.02*mult;}
 							else if (name=='keenmoss') {effs.itemDrops+=0.03*mult;}
-							else if (name=='queenbeet') {effs.goldenCookieEffDur+=0.003*mult;effs.cps*=1-0.02*mult;}
+							else if (name=='queenbeet') {effs.goldenMilkEffDur+=0.003*mult;effs.cps*=1-0.02*mult;}
 							else if (name=='queenbeetLump') {effs.cps*=1-0.1*mult;}
 							else if (name=='glovemorel') {effs.click+=0.04*mult;effs.cursorCps+=0.01*mult;effs.cps*=1-0.01*mult;}
 							else if (name=='cheapcap') {effs.upgradeCost*=1-0.002*mult;effs.buildingCost*=1-0.002*mult;}
-							else if (name=='foolBolete') {effs.goldenCookieFreq+=0.02*mult;effs.goldenCookieGain*=1-0.05*mult;effs.goldenCookieDur*=1-0.02*mult;effs.goldenCookieEffDur*=1-0.02*mult;}
+							else if (name=='foolBolete') {effs.goldenMilkFreq+=0.02*mult;effs.goldenMilkGain*=1-0.05*mult;effs.goldenMilkDur*=1-0.02*mult;effs.goldenMilkEffDur*=1-0.02*mult;}
 							else if (name=='wrinklegill') {effs.wrinklerSpawn+=0.02*mult;effs.wrinklerEat+=0.01*mult;}
-							else if (name=='greenRot') {effs.goldenCookieDur+=0.005*mult;effs.goldenCookieFreq+=0.01*mult;effs.itemDrops+=0.01*mult;}
+							else if (name=='greenRot') {effs.goldenMilkDur+=0.005*mult;effs.goldenMilkFreq+=0.01*mult;effs.itemDrops+=0.01*mult;}
 							else if (name=='shriekbulb') {effs.cps*=1-0.02*mult;}
 						}
 					}
@@ -939,20 +939,20 @@ M.launch=function()
 					{
 						var effs={
 							cps:{n:'CpS'},
-							click:{n:'cookies/click'},
+							click:{n:'Milks/click'},
 							cursorCps:{n:'cursor CpS'},
 							grandmaCps:{n:'grandma CpS'},
-							goldenCookieGain:{n:'golden cookie gains'},
-							goldenCookieFreq:{n:'golden cookie frequency'},
-							goldenCookieDur:{n:'golden cookie duration'},
-							goldenCookieEffDur:{n:'golden cookie effect duration'},
-							wrathCookieGain:{n:'wrath cookie gains'},
-							wrathCookieFreq:{n:'wrath cookie frequency'},
-							wrathCookieDur:{n:'wrath cookie duration'},
-							wrathCookieEffDur:{n:'wrath cookie effect duration'},
+							goldenMilkGain:{n:'golden Milk gains'},
+							goldenMilkFreq:{n:'golden Milk frequency'},
+							goldenMilkDur:{n:'golden Milk duration'},
+							goldenMilkEffDur:{n:'golden Milk effect duration'},
+							wrathMilkGain:{n:'wrath Milk gains'},
+							wrathMilkFreq:{n:'wrath Milk frequency'},
+							wrathMilkDur:{n:'wrath Milk duration'},
+							wrathMilkEffDur:{n:'wrath Milk effect duration'},
 							reindeerGain:{n:'reindeer gains'},
-							reindeerFreq:{n:'reindeer cookie frequency'},
-							reindeerDur:{n:'reindeer cookie duration'},
+							reindeerFreq:{n:'reindeer Milk frequency'},
+							reindeerDur:{n:'reindeer Milk duration'},
 							itemDrops:{n:'random drops'},
 							milk:{n:'milk effects'},
 							wrinklerSpawn:{n:'wrinkler spawn rate'},
@@ -1093,7 +1093,7 @@ M.launch=function()
 		M.getCost=function(me)
 		{
 			if (Game.Has('Turbo-charged soil')) return 0;
-			return Math.max(me.costM,Game.cookiesPs*me.cost*60)*(Game.HasAchiev('Seedless to nay')?0.95:1);
+			return Math.max(me.costM,Game.MilksPs*me.cost*60)*(Game.HasAchiev('Seedless to nay')?0.95:1);
 		}
 		
 		M.getPlantDesc=function(me)
@@ -1130,7 +1130,7 @@ M.launch=function()
 		}
 		M.canPlant=function(me)
 		{
-			if (Game.cookies>=M.getCost(me)) return true; else return false;
+			if (Game.Milks>=M.getCost(me)) return true; else return false;
 		}
 		
 		M.cursor=1;
@@ -1170,7 +1170,7 @@ M.launch=function()
 					'<div class="icon" style="background:url(img/gardenPlants.png?v='+Game.version+');float:left;margin-left:-24px;margin-top:-4px;background-position:'+(-0*48)+'px '+(-me.icon*48)+'px;"></div>'+
 					'<div class="icon" style="background:url(img/gardenPlants.png?v='+Game.version+');float:left;margin-left:-24px;margin-top:-28px;background-position:'+(-4*48)+'px '+(-me.icon*48)+'px;"></div>'+
 					'<div style="background:url(img/turnInto.png);width:20px;height:22px;position:absolute;left:28px;top:24px;z-index:1000;"></div>'+
-					(me.plantable?('<div style="float:right;text-align:right;width:100px;"><small>Planting cost :</small><br><span class="price'+(M.canPlant(me)?'':' disabled')+'">'+Beautify(Math.round(shortenNumber(M.getCost(me))))+'</span><br><small>'+Game.sayTime(me.cost*60*30,-1)+' of CpS,<br>minimum '+Beautify(me.costM)+' cookies</small></div>'):'')+
+					(me.plantable?('<div style="float:right;text-align:right;width:100px;"><small>Planting cost :</small><br><span class="price'+(M.canPlant(me)?'':' disabled')+'">'+Beautify(Math.round(shortenNumber(M.getCost(me))))+'</span><br><small>'+Game.sayTime(me.cost*60*30,-1)+' of CpS,<br>minimum '+Beautify(me.costM)+' Milks</small></div>'):'')+
 					'<div style="width:300px;"><div class="name">'+me.name+' seed</div><div><small>'+(me.plantable?'Click to select this seed for planting.':'<span class="red">This seed cannot be planted.</span>')+'<br>Shift+ctrl+click to harvest all mature plants of this type.</small></div></div>'+
 					'<div class="line"></div>'+
 					M.getPlantDesc(me)+
