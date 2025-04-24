@@ -86,13 +86,13 @@ M.launch=function()
 				name:'Honey',
 				symbol:'HNY',
 				company:'Prosperity Hive',
-				desc:'The folks at <b>Prosperity Hive</b> deal in honey, and it\'s always worked for them. With a work culture so relaxed you\'re almost tempted to ditch the cookie business and join them, these people have little in common with the proverbial busy bee - though their rates do sting quite a bit.',
+				desc:'The folks at <b>Prosperity Hive</b> deal in honey, and it\'s always worked for them. With a work culture so relaxed you\'re almost tempted to ditch the milk business and join them, these people have little in common with the proverbial busy bee - though their rates do sting quite a bit.',
 			},
 			'Fractal engine':{
-				name:'Cookies',
+				name:'milks',
 				symbol:'CKI',
 				company:'Selfmade Bakeries',
-				desc:'Interesting. It appears there\'s still a company out there trying to sell cookies even with your stranglehold on the market. No matter - you figure <b>Selfmade Bakeries</b>\' largely inferior product will make decent fodder for the mouse traps in your factories.',
+				desc:'Interesting. It appears there\'s still a company out there trying to sell milks even with your stranglehold on the market. No matter - you figure <b>Selfmade Bakeries</b>\' largely inferior product will make decent fodder for the mouse traps in your factories.',
 			},
 			'Javascript console':{
 				name:'Recipes',
@@ -134,14 +134,14 @@ M.launch=function()
 				var me=M.goodsById[id];
 				var icon=me.icon||[0,0];
 				var val=M.getGoodPrice(me)
-				var cost=Game.cookiesPsRawHighest*val;
+				var cost=Game.milksPsRawHighest*val;
 				var buyOrSell=n>0;
 				var overhead=1;
 				var stock=me.stock;
 				var maxStock=M.getGoodMaxStock(me);
 				if (buyOrSell) overhead*=1+0.01*(20*Math.pow(0.95,M.brokers));
 				cost*=overhead;
-				if (n==10000) n=Math.floor(Game.cookies/cost);
+				if (n==10000) n=Math.floor(Game.milks/cost);
 				else if (n==-10000) n=me.stock;
 				n=Math.abs(n);
 				if (buyOrSell) n=Math.min(n,maxStock-stock);
@@ -154,7 +154,7 @@ M.launch=function()
 					(overhead>1?('<div style="font-size:9px;opacity:0.6;">(+<b>'+Beautify((overhead-1)*100,2)+'%</b> overhead)</div>'):'')+
 					'<div class="line"></div>'+
 					'<div style="font-size:9px;opacity:0.6;font-weight:bold;">'+(buyOrSell?'you spend':'you earn')+':</div>'+
-					'<div><b class="hasTinyCookie '+(n<=0?'gray':(Game.cookies>=cost*n || !buyOrSell)?'green':'red')+'">'+Beautify(cost*n)+'</b></div>'+
+					'<div><b class="hasTinymilk '+(n<=0?'gray':(Game.milks>=cost*n || !buyOrSell)?'green':'red')+'">'+Beautify(cost*n)+'</b></div>'+
 					(n>0?('<div style="font-size:9px;opacity:0.6;font-weight:bold;">($'+Beautify(val*overhead*n,2)+')</div>'+
 					'<div style="font-size:9px;opacity:0.6;font-weight:bold;">('+Game.sayTime(val*overhead*n*Game.fps,-1)+' of CpS)</div>'):'')+
 					(((me.last==1 && !buyOrSell) || (me.last==2 && buyOrSell))?'<div class="line"></div><div class="red">You cannot buy and sell this stock in the same tick.</div>':'')+
@@ -193,12 +193,12 @@ M.launch=function()
 		{
 			var me=M.goodsById[id];
 			var costInS=M.getGoodPrice(me);
-			var cost=Game.cookiesPsRawHighest*costInS;
+			var cost=Game.milksPsRawHighest*costInS;
 			var overhead=1+0.01*(20*Math.pow(0.95,M.brokers));
 			cost*=overhead;
-			if (n==10000) n=Math.floor(Game.cookies/cost);
+			if (n==10000) n=Math.floor(Game.milks/cost);
 			n=Math.min(n,M.getGoodMaxStock(me)-me.stock);
-			if (n>0 && me.last!=2 && Game.cookies>=cost*n && me.stock+n<=M.getGoodMaxStock(me))
+			if (n>0 && me.last!=2 && Game.milks>=cost*n && me.stock+n<=M.getGoodMaxStock(me))
 			{
 				if (costInS*overhead*n>=86400) Game.Win('Buy buy buy');
 				M.profit-=costInS*overhead*n;
@@ -232,9 +232,9 @@ M.launch=function()
 				if (M.profit>0) Game.Win('Initial public offering');
 				if (M.profit>=10000000) Game.Win('Liquid assets');
 				if (M.profit>=31536000) Game.Win('Gaseous assets');
-				//Game.Earn(Game.cookiesPsRawHighest*costInS*n);
-				Game.cookies+=Game.cookiesPsRawHighest*costInS*n;
-				Game.cookiesEarned=Math.max(Game.cookies,Game.cookiesEarned);
+				//Game.Earn(Game.milksPsRawHighest*costInS*n);
+				Game.milks+=Game.milksPsRawHighest*costInS*n;
+				Game.milksEarned=Math.max(Game.milks,Game.milksEarned);
 				me.stock-=n;
 				me.last=2;
 				PlaySound('snd/cashIn.mp3',0.4);
@@ -307,7 +307,7 @@ M.launch=function()
 		M.brokers=0;
 		
 		M.getMaxBrokers=function(){return Math.ceil(Game.Objects['Grandma'].highest/10+Game.Objects['Grandma'].level);}
-		M.getBrokerPrice=function(){return Game.cookiesPsRawHighest*60*20;}
+		M.getBrokerPrice=function(){return Game.milksPsRawHighest*60*20;}
 		M.brokersTooltip=function()
 		{
 			return function(){
@@ -316,14 +316,14 @@ M.launch=function()
 				'<div class="icon" style="float:left;margin-left:-8px;margin-top:-8px;background-position:'+(-icon[0]*48)+'px '+(-icon[1]*48)+'px;"></div>'+
 				'<div class="name">Stockbrokers <span style="font-size:11px;opacity:0.6;">(you have '+Beautify(M.brokers)+')</span></div>'+
 				'<div class="line"></div><div class="description" style="font-size:11px;">'+
-					'A nice broker to trade more cookies.<br>'+
+					'A nice broker to trade more milks.<br>'+
 					'&bull; Buying goods normally incurs overhead costs of <b>20% extra</b>. Each broker you hire reduces that cost by <b>5%</b>.<br>'+
 					'&bull; Current overhead costs thanks to your '+Beautify(M.brokers)+' broker'+(M.brokers==1?'':'s')+': <b>+'+Beautify(20*Math.pow(0.95,M.brokers),2)+'%</b><br>'+
-					'&bull; Buying a broker costs <b class="hasTinyCookie '+(Game.cookies>=M.getBrokerPrice()?'green':'red')+'">20 minutes</b> of CpS (that\'s $1200).<br>'+
+					'&bull; Buying a broker costs <b class="hasTinymilk '+(Game.milks>=M.getBrokerPrice()?'green':'red')+'">20 minutes</b> of CpS (that\'s $1200).<br>'+
 					'&bull; Maximum number of brokers you can own: <b class="'+(M.brokers<M.getMaxBrokers()?'green':'red')+'">'+Beautify(M.getMaxBrokers())+'</b> (the highest amount of grandmas you\'ve owned this run, divided by 10, plus your grandma level)<br>'+
 					'<q>Brokers are Wall Street-class grandmas versed in the ways of finance. Stockbroker grandmas work hard and play hard, and will fight telephone in hand to get your clients the best possible deals - with a sizeable profit margin for you, of course.</q>'+
 					'<div class="line"></div><div style="font-size:11px;text-align:center;">'+
-						'Hiring a new broker will cost you <b class="hasTinyCookie '+(Game.cookies>=M.getBrokerPrice()?'green':'red')+'">'+Beautify(M.getBrokerPrice())+' cookies</b>.'+
+						'Hiring a new broker will cost you <b class="hasTinymilk '+(Game.milks>=M.getBrokerPrice()?'green':'red')+'">'+Beautify(M.getBrokerPrice())+' milks</b>.'+
 					'</div>'+
 				'</div>'+
 				'</div>';
@@ -346,7 +346,7 @@ M.launch=function()
 				'<div class="line"></div><div class="description" style="font-size:11px;">'+
 					'By taking this loan, you will get <b class="green">+'+Math.round((loan[1]-1)*100)+'%</b> CpS for the next <b>'+Game.sayTime(60*loan[2]*Game.fps)+'</b>.<br>'+
 					'However, you will get <b class="red">'+Math.round((loan[3]-1)*100)+'%</b> CpS for the next <b>'+Game.sayTime(60*loan[4]*Game.fps)+'</b> after that.<br>'+
-					'You must also pay an immediate downpayment of <b class="hasTinyCookie red">'+Beautify(Game.cookies*loan[5])+'</b> (<b>'+(loan[5]*100)+'%</b> of your current bank).<br>'+
+					'You must also pay an immediate downpayment of <b class="hasTinymilk red">'+Beautify(Game.milks*loan[5])+'</b> (<b>'+(loan[5]*100)+'%</b> of your current bank).<br>'+
 					'<q>'+loan[6]+'</q>'+
 				'</div>';
 				return str;
@@ -358,7 +358,7 @@ M.launch=function()
 			if (!interest)
 			{
 				if (Game.hasBuff('Loan '+id) || Game.hasBuff('Loan '+id+' (interest)')) return false;
-				Game.Spend(Game.cookies*loan[5]);
+				Game.Spend(Game.milks*loan[5]);
 				Game.gainBuff('loan '+id,loan[2]*60,loan[1]);
 			}
 			else
@@ -434,7 +434,7 @@ M.launch=function()
 			
 			str+='<div id="bankHeader" style="z-index:10;position:relative;">'+
 				'<div>'+
-					'<div style="padding:1px 4px;font-size:10px;color:rgba(255,255,255,0.5);">Profits: <span id="bankBalance">$0</span>. All prices are in <b style="color:#fff;">$</b>econds of your highest raw cookies per second. <span id="bankNextTick"></span></div>'+
+					'<div style="padding:1px 4px;font-size:10px;color:rgba(255,255,255,0.5);">Profits: <span id="bankBalance">$0</span>. All prices are in <b style="color:#fff;">$</b>econds of your highest raw milks per second. <span id="bankNextTick"></span></div>'+
 					'<div id="bankOffice" style="display:inline-block;padding:0px 4px;" '+Game.getDynamicTooltip('Game.ObjectsById['+M.parent.id+'].minigame.officeTooltip()','this')+'><div id="bankOfficeIcon" class="icon" style="pointer-events:none;display:inline-block;transform:scale(0.5);margin:-16px -18px -12px -14px;vertical-align:middle;background-position:'+(-0*48)+'px '+(-33*48)+'px;"></div><span id="bankOfficeName" class="bankSymbol" style="width:128px;"></span><div class="bankButton bankButtonBuy bankButtonOff" id="bankOfficeUpgrade">-</div></div>'+
 					'<div id="bankBrokers" style="display:inline-block;padding:0px 4px;" '+Game.getDynamicTooltip('Game.ObjectsById['+M.parent.id+'].minigame.brokersTooltip()','this')+'><div id="bankBrokersIcon" class="icon" style="pointer-events:none;display:inline-block;transform:scale(0.5);margin:-16px -18px -12px -14px;vertical-align:middle;background-position:'+(-1*48)+'px '+(-33*48)+'px;"></div><span id="bankBrokersText" class="bankSymbol" style="width:96px;">no brokers</span><div class="bankButton bankButtonBuy bankButtonOff" id="bankBrokersBuy">Hire</div></div>'+
 					'<div style="display:inline-block;padding:0px 4px;"><div id="bankLoan1" style="display:none;" class="bankButton bankButtonSell bankButtonOff" '+Game.getDynamicTooltip('Game.ObjectsById['+M.parent.id+'].minigame.loanTooltip(1)','this')+'>1st loan</div><div id="bankLoan2" style="display:none;" class="bankButton bankButtonSell bankButtonOff" '+Game.getDynamicTooltip('Game.ObjectsById['+M.parent.id+'].minigame.loanTooltip(2)','this')+'>2nd loan</div><div id="bankLoan3" style="display:none;" class="bankButton bankButtonSell bankButtonOff" '+Game.getDynamicTooltip('Game.ObjectsById['+M.parent.id+'].minigame.loanTooltip(3)','this')+'>3rd loan</div></div>'+
@@ -533,7 +533,7 @@ M.launch=function()
 			}
 		});
 		AddEvent(l('bankBrokersBuy'),'click',function(e){
-			if (M.brokers<M.getMaxBrokers() && Game.cookies>=M.getBrokerPrice())
+			if (M.brokers<M.getMaxBrokers() && Game.milks>=M.getBrokerPrice())
 			{
 				Game.Spend(M.getBrokerPrice());
 				M.brokers+=1;
@@ -1051,7 +1051,7 @@ M.launch=function()
 				else l('bankOfficeUpgrade').classList.add('bankButtonOff');
 			}
 			l('bankBrokersText').innerHTML=M.brokers==0?'no brokers':M.brokers==1?'1 broker':(M.brokers+' brokers');
-			if (M.brokers<M.getMaxBrokers() && Game.cookies>=M.getBrokerPrice()) l('bankBrokersBuy').classList.remove('bankButtonOff');
+			if (M.brokers<M.getMaxBrokers() && Game.milks>=M.getBrokerPrice()) l('bankBrokersBuy').classList.remove('bankButtonOff');
 			else l('bankBrokersBuy').classList.add('bankButtonOff');
 			
 			if (M.officeLevel<=1) l('bankLoan1').style.display='none';
