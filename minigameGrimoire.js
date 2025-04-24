@@ -12,32 +12,32 @@ M.launch=function()
 		M.spells={
 			'conjure baked goods':{
 				name:'Conjure Baked Goods',
-				desc:'Summon half an hour worth of your CpS, capped at 15% of your cookies owned.',
+				desc:'Summon half an hour worth of your CpS, capped at 15% of your Milks owned.',
 				failDesc:'Trigger a 15-minute clot and lose 15 minutes of CpS.',
 				icon:[21,11],
 				costMin:2,
 				costPercent:0.4,
 				win:function()
 				{
-					var val=Math.max(7,Math.min(Game.cookies*0.15,Game.cookiesPs*60*30));
+					var val=Math.max(7,Math.min(Game.Milks*0.15,Game.MilksPs*60*30));
 					Game.Earn(val);
-					Game.Notify('Conjure baked goods!','You magic <b>'+Beautify(val)+' cookie'+(val==1?'':'s')+'</b> out of thin air.',[21,11],6);
-					Game.Popup('<div style="font-size:80%;">+'+Beautify(val)+' cookie'+(val==1?'':'s')+'!</div>',Game.mouseX,Game.mouseY);
+					Game.Notify('Conjure baked goods!','You magic <b>'+Beautify(val)+' Milk'+(val==1?'':'s')+'</b> out of thin air.',[21,11],6);
+					Game.Popup('<div style="font-size:80%;">+'+Beautify(val)+' Milk'+(val==1?'':'s')+'!</div>',Game.mouseX,Game.mouseY);
 				},
 				fail:function()
 				{
 					var buff=Game.gainBuff('clot',60*15,0.5);
-					var val=Math.min(Game.cookies*0.15,Game.cookiesPs*60*15)+13;
-					val=Math.min(Game.cookies,val);
+					var val=Math.min(Game.Milks*0.15,Game.MilksPs*60*15)+13;
+					val=Math.min(Game.Milks,val);
 					Game.Spend(val);
 					Game.Notify(buff.name,buff.desc,buff.icon,6);
-					Game.Popup('<div style="font-size:80%;">Backfire!<br>Summoning failed! Lost '+Beautify(val)+' cookie'+(val==1?'':'s')+'!</div>',Game.mouseX,Game.mouseY);
+					Game.Popup('<div style="font-size:80%;">Backfire!<br>Summoning failed! Lost '+Beautify(val)+' Milk'+(val==1?'':'s')+'!</div>',Game.mouseX,Game.mouseY);
 				},
 			},
 			'hand of fate':{
 				name:'Force the Hand of Fate',
-				desc:'Summon a random golden cookie. Each existing golden cookie makes this spell +15% more likely to backfire.',
-				failDesc:'Summon an unlucky wrath cookie.',
+				desc:'Summon a random golden Milk. Each existing golden Milk makes this spell +15% more likely to backfire.',
+				failDesc:'Summon an unlucky wrath Milk.',
 				icon:[22,11],
 				costMin:10,
 				costPercent:0.6,
@@ -49,15 +49,15 @@ M.launch=function()
 				{
 					var newShimmer=new Game.shimmer('golden',{noWrath:true});
 					var choices=[];
-					choices.push('frenzy','multiply cookies');
+					choices.push('frenzy','multiply Milks');
 					if (!Game.hasBuff('Dragonflight')) choices.push('click frenzy');
-					if (Math.random()<0.1) choices.push('cookie storm','cookie storm','blab');
+					if (Math.random()<0.1) choices.push('Milk storm','Milk storm','blab');
 					if (Game.BuildingsOwned>=10 && Math.random()<0.25) choices.push('building special');
-					//if (Math.random()<0.2) choices.push('clot','cursed finger','ruin cookies');
-					if (Math.random()<0.15) choices=['cookie storm drop'];
+					//if (Math.random()<0.2) choices.push('clot','cursed finger','ruin Milks');
+					if (Math.random()<0.15) choices=['Milk storm drop'];
 					if (Math.random()<0.0001) choices.push('free sugar lump');
 					newShimmer.force=choose(choices);
-					if (newShimmer.force=='cookie storm drop')
+					if (newShimmer.force=='Milk storm drop')
 					{
 						newShimmer.sizeMult=Math.random()*0.75+0.25;
 					}
@@ -67,7 +67,7 @@ M.launch=function()
 				{
 					var newShimmer=new Game.shimmer('golden',{wrath:true});
 					var choices=[];
-					choices.push('clot','ruin cookies');
+					choices.push('clot','ruin Milks');
 					if (Math.random()<0.1) choices.push('cursed finger','blood frenzy');
 					if (Math.random()<0.003) choices.push('free sugar lump');
 					if (Math.random()<0.1) choices=['blab'];
@@ -113,7 +113,7 @@ M.launch=function()
 			},
 			'spontaneous edifice':{
 				name:'Spontaneous Edifice',
-				desc:'The spell picks a random building you could afford if you had twice your current cookies, and gives it to you for free. The building selected must be under 400, and cannot be your most-built one (unless it is your only one).',
+				desc:'The spell picks a random building you could afford if you had twice your current Milks, and gives it to you for free. The building selected must be under 400, and cannot be your most-built one (unless it is your only one).',
 				failDesc:'Lose a random building.',
 				icon:[24,11],
 				costMin:20,
@@ -129,7 +129,7 @@ M.launch=function()
 						if (Game.Objects[i].amount>0) n++;
 					}
 					for (var i in Game.Objects)
-					{if ((Game.Objects[i].amount<max || n==1) && Game.Objects[i].getPrice()<=Game.cookies*2 && Game.Objects[i].amount<400) buildings.push(Game.Objects[i]);}
+					{if ((Game.Objects[i].amount<max || n==1) && Game.Objects[i].getPrice()<=Game.Milks*2 && Game.Objects[i].amount<400) buildings.push(Game.Objects[i]);}
 					if (buildings.length==0){Game.Popup('<div style="font-size:80%;">No buildings to improve!</div>',Game.mouseX,Game.mouseY);return -1;}
 					var building=choose(buildings);
 					building.buyFree(1);
